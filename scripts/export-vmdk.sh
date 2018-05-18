@@ -100,5 +100,7 @@ wget https://download.virtualbox.org/virtualbox/5.2.12/VirtualBox-5.2-5.2.12_122
 echo "7266c914bbd3b4acc13f6ee1a38014e6 VirtualBox-5.2-5.2.12_122591_el6-1.x86_64.rpm" | md5sum -c /dev/stdin
 rpm -i --nodeps VirtualBox-5.2-5.2.12_122591_el6-1.x86_64.rpm
 
-VBoxManage convertdd "${device}" "${vmdk}" --format VMDK
+NEW_UUID=$(uuidgen)
+
+VBoxManage convertfromraw "${device}" "${vmdk}" --format VMDK --uuid "${NEW_UUID}"
 chmod 644 "${vmdk}"
